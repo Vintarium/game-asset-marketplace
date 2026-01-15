@@ -1,0 +1,6 @@
+@asset_marketplace_HostAddress = http://localhost:5022
+
+GET {{asset_marketplace_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
