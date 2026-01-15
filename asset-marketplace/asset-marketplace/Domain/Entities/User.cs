@@ -1,4 +1,6 @@
-﻿namespace asset_marketplace.Domain.Entities
+﻿using asset_marketplace.Domain.Enums;
+
+namespace asset_marketplace.Domain.Entities
 {
     public class User
     {
@@ -6,6 +8,6 @@
         public required string Email { get; set; }
         public required string Password { get; set; }
         public required Guid RoleId { get; set; }
-        public Role Role { get; set; } = null!;
+        public UserRole Role { get; set; } = UserRole.User;
     }
 }
