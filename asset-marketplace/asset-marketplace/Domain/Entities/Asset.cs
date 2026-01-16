@@ -8,6 +8,6 @@
         public required decimal Price { get; set; }
         public required string FilePath { get; set; }
         public required Guid SellerId { get; set; }
-        public User? Buyer { get; set; }
+        public User? Seller { get; set; }
     }
 }
