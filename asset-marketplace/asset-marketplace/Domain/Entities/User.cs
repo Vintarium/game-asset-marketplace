@@ -6,8 +6,9 @@ namespace asset_marketplace.Domain.Entities
     {
         public required Guid Id { get; set; }
         public required string Email { get; set; }
-        public required string Password { get; set; }
-        public required Guid RoleId { get; set; }
-        public required UserRole Role { get; set; } = UserRole.None;
+        public required string PasswordHash { get; set; }
+        public  UserRole Role { get; set; } = UserRole.None;
+        public ICollection<Asset> Assets { get; set; } = new List<Asset>();
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }
