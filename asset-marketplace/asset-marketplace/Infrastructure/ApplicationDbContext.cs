@@ -10,9 +10,9 @@ namespace asset_marketplace.Infrastructure
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Asset> Assets { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Asset> Assets { get; set; } = null!;
+        public DbSet<Order> Orders { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
