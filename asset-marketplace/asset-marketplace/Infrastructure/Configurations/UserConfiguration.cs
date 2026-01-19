@@ -1,4 +1,5 @@
-﻿using asset_marketplace.Domain.Entities;
+﻿using asset_marketplace.Domain.Constants;
+using asset_marketplace.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,15 +9,20 @@ namespace asset_marketplace.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.HasKey(u => u.Id);
+
             builder.Property(u => u.Email)
-                   .HasMaxLength(100)
-                   .IsRequired();
+                .HasMaxLength(ApplicationConstants.MaxEmailLength)
+                .IsRequired();
 
             builder.HasIndex(u => u.Email)
-                   .IsUnique();
+                .IsUnique();
 
             builder.Property(u => u.PasswordHash)
-               .HasMaxLength(255);
+                .IsRequired();
+
+            builder.Property(u => u.Role)
+                .IsRequired();
         }
     }
 }
