@@ -4,7 +4,7 @@
     {
         public required decimal TotalAmount { get; set; }
         public required Guid BuyerId { get; set; }
-        public User? Buyer { get; set; }
+        public User Buyer { get; set; } = null!;
         public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
 
     }
