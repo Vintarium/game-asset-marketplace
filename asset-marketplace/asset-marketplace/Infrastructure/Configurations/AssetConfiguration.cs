@@ -9,7 +9,6 @@ namespace asset_marketplace.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Asset> builder)
         {
-
             builder.HasKey(a => a.Id);
 
             builder.Property(a => a.Name)
