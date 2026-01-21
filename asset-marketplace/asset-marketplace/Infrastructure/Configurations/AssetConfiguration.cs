@@ -9,27 +9,26 @@ namespace asset_marketplace.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Asset> builder)
         {
+            builder.HasKey(asset => asset.Id);
 
-            builder.HasKey(a => a.Id);
-
-            builder.Property(a => a.Name)
+            builder.Property(asset => asset.Name)
                 .HasMaxLength(ApplicationConstants.MaxNameLength)
                 .IsRequired();
 
-            builder.Property(a => a.Description)
+            builder.Property(asset => asset.Description)
                 .HasMaxLength(ApplicationConstants.MaxDescriptionLength);
 
-            builder.Property(a => a.Price)
+            builder.Property(asset => asset.Price)
                 .HasColumnType(ApplicationConstants.MoneyType)
                 .IsRequired();
 
-            builder.Property(a => a.FilePath)
+            builder.Property(asset => asset.FilePath)
                 .HasMaxLength(ApplicationConstants.MaxUrlLength)
                 .IsRequired();
 
-            builder.HasOne(a => a.Seller)
-                .WithMany(u => u.Assets)
-                .HasForeignKey(a => a.SellerId)
+            builder.HasOne(asset => asset.Seller)
+                .WithMany(user => user.Assets)
+                .HasForeignKey(asset => asset.SellerId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

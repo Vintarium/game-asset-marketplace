@@ -9,19 +9,19 @@ namespace asset_marketplace.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(u => u.Id);
+            builder.HasKey(user => user.Id);
 
-            builder.Property(u => u.Email)
+            builder.Property(user => user.Email)
                 .HasMaxLength(ApplicationConstants.MaxEmailLength)
                 .IsRequired();
 
-            builder.HasIndex(u => u.Email)
+            builder.HasIndex(user => user.Email)
                 .IsUnique();
 
-            builder.Property(u => u.PasswordHash)
+            builder.Property(user => user.PasswordHash)
                 .IsRequired();
 
-            builder.Property(u => u.Role)
+            builder.Property(user => user.Role)
                 .IsRequired();
         }
     }

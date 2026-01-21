@@ -9,15 +9,15 @@ namespace asset_marketplace.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
-            builder.HasKey(oi => oi.Id);
+            builder.HasKey(orderItem => orderItem.Id);
 
-            builder.Property(oi => oi.UnitPrice)
+            builder.Property(orderItem => orderItem.UnitPrice)
                 .HasColumnType(ApplicationConstants.MoneyType)
                 .IsRequired();
 
-            builder.HasOne(oi => oi.Asset)
+            builder.HasOne(orderItem => orderItem.Asset)
                 .WithMany()
-                .HasForeignKey(oi => oi.AssetId)
+                .HasForeignKey(orderItem => orderItem.AssetId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
