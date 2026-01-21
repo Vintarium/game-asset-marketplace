@@ -7,9 +7,6 @@ namespace asset_marketplace.Infrastructure
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)  : DbContext(options)
     {
-        public ApplicationDbContext
-        {
-        }
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Asset> Assets { get; set; } = null!;
         public DbSet<Order> Orders { get; set; } = null!;
