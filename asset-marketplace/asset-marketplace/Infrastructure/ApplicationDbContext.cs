@@ -1,12 +1,13 @@
-﻿using System.Reflection;
-using asset_marketplace.Domain.Entities;
+﻿using asset_marketplace.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Reflection;
 
 namespace asset_marketplace.Infrastructure
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)  : DbContext(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public ApplicationDbContext
         {
         }
         public DbSet<User> Users { get; set; } = null!;
