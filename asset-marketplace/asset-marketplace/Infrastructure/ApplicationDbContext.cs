@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace asset_marketplace.Infrastructure
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)  : DbContext(options)
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
         public DbSet<User> Users => Set<User>();
         public DbSet<Asset> Assets => Set<Asset>();
