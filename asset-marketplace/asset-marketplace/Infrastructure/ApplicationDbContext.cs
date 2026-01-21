@@ -1,18 +1,16 @@
-﻿using System.Reflection;
-using asset_marketplace.Domain.Entities;
+﻿using asset_marketplace.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Reflection;
 
 namespace asset_marketplace.Infrastructure
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
-        }
-        public DbSet<User> Users { get; set; } = null!;
-        public DbSet<Asset> Assets { get; set; } = null!;
-        public DbSet<Order> Orders { get; set; } = null!;
-        public DbSet<OrderItem> OrderItems { get; set; } = null!;
+        public DbSet<User> Users => Set<User>();
+        public DbSet<Asset> Assets => Set<Asset>();
+        public DbSet<Order> Orders => Set<Order>();
+        public DbSet<OrderItem> OrderItems => Set<OrderItem>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
