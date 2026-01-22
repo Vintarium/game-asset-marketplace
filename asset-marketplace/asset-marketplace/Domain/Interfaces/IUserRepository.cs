@@ -4,7 +4,7 @@ namespace asset_marketplace.Domain.Interfaces
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetAllAsync();
+        Task<List<User>> GetAllAsync(int pageNumber, int pageSize);
         Task<User?> GetByIdAsync(Guid id);
         Task AddAsync(User user);
         Task UpdateAsync(User user);

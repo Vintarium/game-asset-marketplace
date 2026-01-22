@@ -11,9 +11,13 @@ namespace asset_marketplace.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<List<User>> GetAllAsync()
+        public async Task<List<User>> GetAllAsync(int pageNumber, int pageSize)
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users
+                .OrderBy(user => user.Id)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
         }
         public async Task<User?> GetByIdAsync(Guid id)
         {

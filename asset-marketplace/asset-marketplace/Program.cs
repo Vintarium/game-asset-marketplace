@@ -25,7 +25,18 @@ using (var scope = app.Services.CreateScope())
     var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
 
     Console.WriteLine("START TO CREATE USERS: \n");
- 
+
+    for (int i = 0; i < 50; i++)
+    {
+        await userRepository.AddAsync(new User
+        {
+            Id = Guid.NewGuid(),
+            Email = i.ToString() + "@test.com",
+            PasswordHash = "password",
+            Role = UserRole.Buyer
+        });
+    }
+
     var userOne = new User
     {
         Id = Guid.NewGuid(),
@@ -34,38 +45,21 @@ using (var scope = app.Services.CreateScope())
         Role = UserRole.Buyer
     };
 
-    var userTwo = new User
-    {
-        Id = Guid.NewGuid(),
-        Email = "two@test.com",
-        PasswordHash = "password",
-        Role = UserRole.Seller
-    };
-
-    var userThree = new User
-    {
-        Id = Guid.NewGuid(),
-        Email = "three@test.com",
-        PasswordHash = "password",
-        Role = UserRole.Admin
-    };
-
-    await userRepository.AddAsync(userOne);
-    await userRepository.AddAsync(userTwo);
-    await userRepository.AddAsync(userThree);
-
-    var AllUsers = await userRepository.GetAllAsync();
+    var AllUsers = await userRepository.GetAllAsync(1, 5);
+    int count = 1;
 
     Console.WriteLine("\n GETT ALL USERS FROM DATABASE AND SHOW THEM: \n");
 
     foreach (var user in AllUsers)
     {
         Console.WriteLine($" user.Id: {user.Id} ,\n user.Email: {user.Email} ,\n User.Role: {user.Role} ,\n user.CreatedAt: {user.CreatedAt} \n");
+        Console.WriteLine($"user number: {count} \n");
+        count++;
     }
 
     Console.WriteLine("\n GET USER BY ID AND SHOW HIM: \n");
 
-    var UserById = await userRepository.GetByIdAsync(userThree.Id);
+    var UserById = await userRepository.GetByIdAsync(userOne.Id);
 
     if (UserById != null)
     {
@@ -74,15 +68,14 @@ using (var scope = app.Services.CreateScope())
 
     Console.WriteLine("\n GET USER BY ID, UPDATE HIM AND SHOW HIM: \n");
 
-    var UpdateUser = await userRepository.GetByIdAsync(userThree.Id);
+    var UpdateUser = await userRepository.GetByIdAsync(userOne.Id);
 
     if (UpdateUser != null)
     {
         UpdateUser.Email = "EmailUpdated@gmail.com";
-
     }
 
-    var userThreeAfterUpdate = await userRepository.GetByIdAsync(userThree.Id);
+    var userThreeAfterUpdate = await userRepository.GetByIdAsync(userOne.Id);
     if (userThreeAfterUpdate != null)
     {
         Console.WriteLine($" userThreeAfterUpdate: {userThreeAfterUpdate.Email}");
@@ -92,7 +85,7 @@ using (var scope = app.Services.CreateScope())
 
     await userRepository.DeleteAsync(userOne.Id);
 
-    var AllUsersAfterDeleted = await userRepository.GetAllAsync();
+    var AllUsersAfterDeleted = await userRepository.GetAllAsync(1, 10);
 
     foreach (var user in AllUsersAfterDeleted)
     {
