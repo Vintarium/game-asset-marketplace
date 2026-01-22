@@ -1,10 +1,8 @@
-﻿namespace asset_marketplace.Domain.Entities
+﻿namespace asset_marketplace.Domain.Entities;
+public class Order : BaseEntity
 {
-    public class Order : BaseEntity
-    {
-        public required decimal TotalAmount { get; set; }
-        public required Guid BuyerId { get; set; }
-        public User Buyer { get; set; } = null!;
-        public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
-    }
+    public required decimal TotalAmount { get; set; }
+    public required Guid BuyerId { get; set; }
+    public User Buyer { get; set; } = null!;
+    public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
 }
