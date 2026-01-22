@@ -24,6 +24,8 @@ using (var scope = app.Services.CreateScope())
 {
     var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
 
+    Console.WriteLine("START TO CREATE USERS: \n");
+ 
     var userOne = new User
     {
         Id = Guid.NewGuid(),
@@ -54,19 +56,49 @@ using (var scope = app.Services.CreateScope())
 
     var AllUsers = await userRepository.GetAllAsync();
 
+    Console.WriteLine("\n GETT ALL USERS FROM DATABASE AND SHOW THEM: \n");
+
     foreach (var user in AllUsers)
     {
-        Console.WriteLine($"user.Id: {user.Id}, user.Email: {user.Email}, User.Role: {user.Role} , user.CreatedAt: {user.CreatedAt}");
+        Console.WriteLine($" user.Id: {user.Id} ,\n user.Email: {user.Email} ,\n User.Role: {user.Role} ,\n user.CreatedAt: {user.CreatedAt} \n");
     }
 
-    var UserById = await userRepository.GetByIdAsync(userThree.Id); 
+    Console.WriteLine("\n GET USER BY ID AND SHOW HIM: \n");
+
+    var UserById = await userRepository.GetByIdAsync(userThree.Id);
 
     if (UserById != null)
     {
-        Console.WriteLine($"userById.Id: {UserById.Id}, userById.Email: {UserById.Email}, UserById.Role: {UserById.Role} , UserById.CreatedAt: {UserById.CreatedAt}");
+        Console.WriteLine($" userById.Id: {UserById.Id} ,\n userById.Email: {UserById.Email} ,\n UserById.Role: {UserById.Role} ,\n UserById.CreatedAt: {UserById.CreatedAt} \n");
+    }
+
+    Console.WriteLine("\n GET USER BY ID, UPDATE HIM AND SHOW HIM: \n");
+
+    var UpdateUser = await userRepository.GetByIdAsync(userThree.Id);
+
+    if (UpdateUser != null)
+    {
+        UpdateUser.Email = "EmailUpdated@gmail.com";
+
+    }
+
+    var userThreeAfterUpdate = await userRepository.GetByIdAsync(userThree.Id);
+    if (userThreeAfterUpdate != null)
+    {
+        Console.WriteLine($" userThreeAfterUpdate: {userThreeAfterUpdate.Email}");
+    }
+
+    Console.WriteLine("\n DELETE USER BY ID AND SHOW ALL USERS WITHOUT DELETED USER: \n");
+
+    await userRepository.DeleteAsync(userOne.Id);
+
+    var AllUsersAfterDeleted = await userRepository.GetAllAsync();
+
+    foreach (var user in AllUsersAfterDeleted)
+    {
+        Console.WriteLine($" user.Id: {user.Id} ,\n user.Email: {user.Email} ,\n User.Role: {user.Role} ,\n user.CreatedAt: {user.CreatedAt}  \n");
     }
 }
-
 
 if (app.Environment.IsDevelopment())
 {
