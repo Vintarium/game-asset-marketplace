@@ -9,6 +9,5 @@ namespace asset_marketplace.Domain.Interfaces
         Task AddAsync(User user);
         Task UpdateAsync(User user);
         Task DeleteAsync(Guid id);
-
     }
 }
