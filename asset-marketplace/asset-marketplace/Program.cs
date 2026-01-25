@@ -23,6 +23,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+    CancellationToken cancellationToken = new CancellationToken();
 
     Console.WriteLine("START TO CREATE USERS: \n");
 
@@ -34,7 +35,7 @@ using (var scope = app.Services.CreateScope())
             Email = i.ToString() + "@test.com",
             PasswordHash = "password",
             Role = UserRole.Buyer
-        });
+        }, cancellationToken);
     }
 
     var userOne = new User
@@ -43,9 +44,9 @@ using (var scope = app.Services.CreateScope())
         Email = "one@test.com",
         PasswordHash = "password",
         Role = UserRole.Buyer
-    };
+    }; 
 
-    var AllUsers = await userRepository.GetAllAsync(1, 5);
+    var AllUsers = await userRepository.GetAllAsync(1, 5, cancellationToken);
     int count = 1;
 
     Console.WriteLine("\n GETT ALL USERS FROM DATABASE AND SHOW THEM: \n");
@@ -59,7 +60,7 @@ using (var scope = app.Services.CreateScope())
 
     Console.WriteLine("\n GET USER BY ID AND SHOW HIM: \n");
 
-    var UserById = await userRepository.GetByIdAsync(userOne.Id);
+    var UserById = await userRepository.GetByIdAsync(userOne.Id, cancellationToken);
 
     if (UserById != null)
     {
@@ -68,14 +69,14 @@ using (var scope = app.Services.CreateScope())
 
     Console.WriteLine("\n GET USER BY ID, UPDATE HIM AND SHOW HIM: \n");
 
-    var UpdateUser = await userRepository.GetByIdAsync(userOne.Id);
+    var UpdateUser = await userRepository.GetByIdAsync(userOne.Id, cancellationToken);
 
     if (UpdateUser != null)
     {
         UpdateUser.Email = "EmailUpdated@gmail.com";
     }
 
-    var userThreeAfterUpdate = await userRepository.GetByIdAsync(userOne.Id);
+    var userThreeAfterUpdate = await userRepository.GetByIdAsync(userOne.Id, cancellationToken);
     if (userThreeAfterUpdate != null)
     {
         Console.WriteLine($" userThreeAfterUpdate: {userThreeAfterUpdate.Email}");
@@ -83,9 +84,9 @@ using (var scope = app.Services.CreateScope())
 
     Console.WriteLine("\n DELETE USER BY ID AND SHOW ALL USERS WITHOUT DELETED USER: \n");
 
-    await userRepository.DeleteAsync(userOne.Id);
+    await userRepository.DeleteAsync(userOne.Id, cancellationToken);
 
-    var AllUsersAfterDeleted = await userRepository.GetAllAsync(1, 10);
+    var AllUsersAfterDeleted = await userRepository.GetAllAsync(1, 10, cancellationToken);
 
     foreach (var user in AllUsersAfterDeleted)
     {
