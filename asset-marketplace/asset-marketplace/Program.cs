@@ -12,7 +12,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRepository<User>, BaseRepository<User>>();
 
 builder.Services.AddControllers();
 
@@ -22,7 +22,7 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var userRepository = scope.ServiceProvider.GetRequiredService<IUserRepository>();
+    var userRepository = scope.ServiceProvider.GetRequiredService<IRepository<User>>();
     CancellationToken cancellationToken = new CancellationToken();
 
     Console.WriteLine("START TO CREATE USERS: \n");
