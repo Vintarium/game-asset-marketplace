@@ -4,6 +4,8 @@ using asset_marketplace.Domain.Entities;
 using asset_marketplace.Domain.Enums;
 using asset_marketplace.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using asset_marketplace.Application.Interfaces;
+using asset_marketplace.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,8 @@ builder.Services.AddScoped<IRepository<User>, BaseRepository<User>>();
 builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
