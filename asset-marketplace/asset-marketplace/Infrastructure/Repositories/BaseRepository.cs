@@ -13,18 +13,18 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         _context = context;
         _dbSet = context.Set<T>();
     }
-    public async Task<List<T>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
+    public Task<List<T>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
-        return await _dbSet
+        return _dbSet
             .AsNoTracking()
             .OrderBy(e => e.Id)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync(cancellationToken);
     }
-    public async Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    public Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await _dbSet
+        return _dbSet
             .AsNoTracking()
             .FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
     }
