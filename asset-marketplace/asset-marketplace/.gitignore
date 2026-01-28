@@ -426,3 +426,11 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.slnx.sqlite
+bin/
+obj/
