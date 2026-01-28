@@ -1,13 +1,11 @@
 ﻿using asset_marketplace.Domain.Enums;
 
-namespace asset_marketplace.Domain.Entities
+namespace asset_marketplace.Domain.Entities;
+public class User : BaseEntity
 {
-    public class User : BaseEntity
-    {
-        public required string Email { get; set; }
-        public required string PasswordHash { get; set; }
-        public UserRole Role { get; set; } = UserRole.None;
-        public ICollection<Asset> Assets { get; set; } = new List<Asset>();
-        public ICollection<Order> Orders { get; set; } = new List<Order>();
-    }
+    public required string Email { get; set; }
+    public required string PasswordHash { get; set; }
+    public UserRole Role { get; set; } = UserRole.None;
+    public ICollection<Asset> Assets { get; set; } = new List<Asset>();
+    public ICollection<Order> Orders { get; set; } = new List<Order>();
 }
