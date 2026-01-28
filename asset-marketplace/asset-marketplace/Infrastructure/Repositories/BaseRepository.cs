@@ -17,7 +17,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         return _dbSet
             .AsNoTracking()
-            .OrderBy(e => e.Id)
+            .OrderBy(entity => entity.Id)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync(cancellationToken);
@@ -26,7 +26,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         return _dbSet
             .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
+            .FirstOrDefaultAsync(entity => entity.Id == id, cancellationToken);
     }
     public async Task AddAsync(T entity, CancellationToken cancellationToken)
     {
