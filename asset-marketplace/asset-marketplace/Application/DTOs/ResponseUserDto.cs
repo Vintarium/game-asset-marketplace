@@ -2,7 +2,7 @@
 
 namespace asset_marketplace.Application.DTOs
 {
-    public record UserResponseDto(
+    public record ResponseUserDto(
         Guid Id,
         string Email,
         UserRole Role
