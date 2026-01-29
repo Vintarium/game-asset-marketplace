@@ -16,11 +16,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IRepository<User>, BaseRepository<User>>();
 
+builder.Services.AddScoped<IUserService, UserService>();
+
 builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
-
-builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
