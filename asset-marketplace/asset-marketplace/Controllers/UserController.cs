@@ -10,7 +10,7 @@ namespace asset_marketplace.Controllers
     {
         [HttpGet]
         public async Task<IActionResult> GetAll(
-            [FromQuery]int page = 1,
+            [FromQuery] int page = 1,
             [FromQuery] int size = 10,
             CancellationToken cancellationToken = default)
         {
@@ -32,12 +32,22 @@ namespace asset_marketplace.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(
-            CreateUserDto createUserDto,
-            CancellationToken cancellationToken)
+        public async Task<IActionResult> Create(CreateUserDto createUserDto, CancellationToken cancellationToken)
         {
             var result = await userService.CreateAsync(createUserDto, cancellationToken);
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+        }
+
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> Update(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken)
+        {
+            var result = await userService.UpdateAsync(id, updateUserDto, cancellationToken);
+
+            if (result is null) 
+            {
+                return NotFound();
+            }
+            return Ok(result);
         }
     }
 }
