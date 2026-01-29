@@ -36,7 +36,7 @@ using (var scope = app.Services.CreateScope())
         await userRepository.AddAsync(new User
         {
             Id = Guid.NewGuid(),
-            Email = i.ToString() + "@test.com",
+            Email = DateTime.UtcNow.ToString() + i.ToString() + "@test.com",
             PasswordHash = "password",
             Role = UserRole.Buyer
         }, cancellationToken);
@@ -45,7 +45,7 @@ using (var scope = app.Services.CreateScope())
     var userOne = new User
     {
         Id = Guid.NewGuid(),
-        Email = "one@test.com",
+        Email = DateTime.UtcNow.ToString() + "one@test.com",
         PasswordHash = "password",
         Role = UserRole.Buyer
     }; 
