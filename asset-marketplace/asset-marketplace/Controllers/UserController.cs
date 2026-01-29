@@ -1,4 +1,5 @@
-﻿using asset_marketplace.Application.Interfaces;
+﻿using asset_marketplace.Application.DTOs;
+using asset_marketplace.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace asset_marketplace.Controllers
@@ -18,7 +19,9 @@ namespace asset_marketplace.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken = default)
+        public async Task<IActionResult> GetById(
+            Guid id,
+            CancellationToken cancellationToken = default)
         {
             var user = await userService.GetByIdAsync(id, cancellationToken);
             if (user is null)
@@ -26,6 +29,15 @@ namespace asset_marketplace.Controllers
                 return NotFound();
             }
             return Ok(user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(
+            CreateUserDto createUserDto,
+            CancellationToken cancellationToken)
+        {
+            var result = await userService.CreateAsync(createUserDto, cancellationToken);
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
     }
 }
