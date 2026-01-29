@@ -46,12 +46,29 @@ namespace asset_marketplace.Application.Services
             };
 
             await _userRepository.AddAsync(user, cancellationToken);
+
+            return new ResponseUserDto(user.Id, user.Email, user.Role);
+        }
+        public async Task<ResponseUserDto?> UpdateAsync(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken)
+        {
+            var user = await _userRepository.GetByIdAsync(id, cancellationToken, asNoTracking: true);
+            if (user is null)
+            {
+                return null;
+            }
+
+            user.Email = updateUserDto.Email;
+            user.Role = updateUserDto.Role;
+
+            await _userRepository.UpdateAsync(user, cancellationToken);
+
             return new ResponseUserDto(user.Id, user.Email, user.Role);
         }
 
         private string HashPassword(string password)
         {
             var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
+
             return Convert.ToHexString(bytes);
         }
     }
