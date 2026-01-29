@@ -8,5 +8,6 @@ namespace asset_marketplace.Application.Interfaces
         Task<ResponseUserDto?> GetByIdAsync(Guid id, CancellationToken cancellation);
         Task<ResponseUserDto> CreateAsync(CreateUserDto createUserDto, CancellationToken cancellationToken);
         Task<ResponseUserDto?> UpdateAsync(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken);
+        Task<bool> DeleteAsync(Guid id, CancellationToken cancellation);
     }
 }

@@ -64,6 +64,17 @@ namespace asset_marketplace.Application.Services
             return new ResponseUserDto(user.Id, user.Email, user.Role);
         }
 
+        public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken)
+        {
+            var user = await _userRepository.GetByIdAsync(id, cancellationToken);
+            if (user is null)
+            {
+                return false;
+            }
+            await _userRepository.DeleteAsync(id, cancellationToken);
+            return true;
+        }
+
         private string HashPassword(string password)
         {
             var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
