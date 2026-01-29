@@ -49,5 +49,16 @@ namespace asset_marketplace.Controllers
             }
             return Ok(result);
         }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
+        {
+            var deleted = await userService.DeleteAsync(id,cancellationToken);
+            if (!deleted)
+            {
+                return NotFound(); 
+            }
+            return NoContent();
+        }
     }
 }
