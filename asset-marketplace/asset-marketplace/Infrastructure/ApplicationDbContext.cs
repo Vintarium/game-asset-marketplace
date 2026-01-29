@@ -15,6 +15,21 @@ namespace asset_marketplace.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                var idProperty = entity.FindProperty("Id");
+
+                if (idProperty is not null && idProperty.ClrType == typeof(Guid))
+                {
+                    modelBuilder.Entity(entity.ClrType)
+                        .Property("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+                }
+            }
+
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
