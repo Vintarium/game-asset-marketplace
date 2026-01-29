@@ -11,25 +11,9 @@ namespace asset_marketplace.Infrastructure
         public DbSet<Asset> Assets => Set<Asset>();
         public DbSet<Order> Orders => Set<Order>();
         public DbSet<OrderItem> OrderItems => Set<OrderItem>();
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            //foreach (var entity in modelBuilder.Model.GetEntityTypes())
-            //{
-            //    var idProperty = entity.FindProperty("Id");
-
-            //    if (idProperty is not null && idProperty.ClrType == typeof(Guid))
-            //    {
-            //        modelBuilder.Entity(entity.ClrType)
-            //            .Property("Id")
-            //            .ValueGeneratedOnAdd()
-            //            .HasColumnType("uuid")
-            //            .HasDefaultValueSql("gen_random_uuid()");
-            //    }
-            //}
-
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
