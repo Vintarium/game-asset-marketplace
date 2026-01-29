@@ -39,7 +39,6 @@ namespace asset_marketplace.Application.Services
         {
             var user = new User
             {
-                Id = Guid.NewGuid(),
                 Email = createUserDto.Email,
                 PasswordHash = HashPassword(createUserDto.PAssword),
                 Role = createUserDto.Role
