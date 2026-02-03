@@ -12,8 +12,8 @@ using asset_marketplace.Infrastructure;
 namespace asset_marketplace.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260129123710_SetGlobalGuidGeneration")]
-    partial class SetGlobalGuidGeneration
+    [Migration("20260203085505_RefactorSchemaAndGuids")]
+    partial class RefactorSchemaAndGuids
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,8 +29,7 @@ namespace asset_marketplace.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("gen_random_uuid()");
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -75,8 +74,7 @@ namespace asset_marketplace.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("gen_random_uuid()");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("BuyerId")
                         .HasColumnType("uuid");
@@ -107,8 +105,7 @@ namespace asset_marketplace.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("gen_random_uuid()");
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("AssetId")
                         .HasColumnType("uuid");
@@ -144,8 +141,7 @@ namespace asset_marketplace.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasDefaultValueSql("gen_random_uuid()");
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
