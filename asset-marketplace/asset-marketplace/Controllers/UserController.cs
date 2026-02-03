@@ -1,5 +1,6 @@
 ﻿using asset_marketplace.Application.DTOs;
 using asset_marketplace.Application.Interfaces;
+using asset_marketplace.Domain.Constants;
 using Microsoft.AspNetCore.Mvc;
 
 namespace asset_marketplace.Controllers
@@ -10,8 +11,8 @@ namespace asset_marketplace.Controllers
     {
         [HttpGet]
         public async Task<IActionResult> GetAll(
-            [FromQuery] int page = 1,
-            [FromQuery] int size = 10,
+            [FromQuery] int page = PaginationConstants.DefaultPageNumber,
+            [FromQuery] int size = PaginationConstants.DefaultPageSize,
             CancellationToken cancellationToken = default)
         {
             var users = await userService.GetAllAsync(page, size, cancellationToken);
@@ -43,7 +44,7 @@ namespace asset_marketplace.Controllers
         {
             var result = await userService.UpdateAsync(id, updateUserDto, cancellationToken);
 
-            if (result is null) 
+            if (result is null)
             {
                 return NotFound();
             }
@@ -53,10 +54,10 @@ namespace asset_marketplace.Controllers
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
-            var deleted = await userService.DeleteAsync(id,cancellationToken);
+            var deleted = await userService.DeleteAsync(id, cancellationToken);
             if (!deleted)
             {
-                return NotFound(); 
+                return NotFound();
             }
             return NoContent();
         }
