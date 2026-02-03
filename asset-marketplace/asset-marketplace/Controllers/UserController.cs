@@ -10,17 +10,16 @@ namespace asset_marketplace.Controllers
     public class UserController(IUserService userService) : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> GetAll(
+        public async Task<List<ResponseUserDto>> GetAll(
             [FromQuery] int page = PaginationConstants.DefaultPageNumber,
             [FromQuery] int size = PaginationConstants.DefaultPageSize,
             CancellationToken cancellationToken = default)
         {
-            var users = await userService.GetAllAsync(page, size, cancellationToken);
-            return Ok(users);
+            return await userService.GetAllAsync(page, size, cancellationToken);
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<IActionResult> GetById(
+        public async Task<ActionResult<ResponseUserDto>> GetById(
             Guid id,
             CancellationToken cancellationToken = default)
         {
@@ -29,7 +28,7 @@ namespace asset_marketplace.Controllers
             {
                 return NotFound();
             }
-            return Ok(user);
+            return user;
         }
 
         [HttpPost]
@@ -40,7 +39,7 @@ namespace asset_marketplace.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> Update(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken)
+        public async Task<ActionResult<ResponseUserDto>> Update(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken)
         {
             var result = await userService.UpdateAsync(id, updateUserDto, cancellationToken);
 
@@ -48,7 +47,7 @@ namespace asset_marketplace.Controllers
             {
                 return NotFound();
             }
-            return Ok(result);
+            return result;
         }
 
         [HttpDelete("{id:guid}")]
