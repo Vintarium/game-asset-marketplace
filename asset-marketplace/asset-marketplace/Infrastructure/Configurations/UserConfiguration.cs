@@ -11,7 +11,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasKey(user => user.Id);
 
         builder.Property(user => user.Email)
-            .HasMaxLength(ApplicationConstants.MaxEmailLength)
+            .HasMaxLength(ValidationConstants.MaxEmailLength)
             .IsRequired();
 
         builder.HasIndex(user => user.Email)
