@@ -44,7 +44,7 @@ namespace asset_marketplace.Application.Services
         }
         public async Task<ResponseUserDto?> UpdateAsync(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken)
         {
-            var user = await userRepository.GetByIdAsync(id, cancellationToken, asNoTracking: true);
+            var user = await userRepository.GetByIdAsync(id, cancellationToken, asNoTracking: false);
             if (user is null)
             {
                 return null;
