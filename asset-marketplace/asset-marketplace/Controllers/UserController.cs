@@ -33,7 +33,7 @@ public class UserController(IUserService userService) : ControllerBase
     {
         var result = await userService.CreateAsync(createUserDto, cancellationToken);
 
-        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+        return Ok(result);
     }
 
     [HttpPut("{id:guid}")]

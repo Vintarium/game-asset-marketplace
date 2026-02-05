@@ -57,6 +57,7 @@ public class UserService(IRepository<User> userRepository) : IUserService
     public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByIdAsync(id, cancellationToken);
+
         if (user is null)
         {
             return false;
