@@ -64,7 +64,7 @@ namespace asset_marketplace.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("Assets");
+                    b.ToTable("Assets", (string)null);
                 });
 
             modelBuilder.Entity("asset_marketplace.Domain.Entities.Order", b =>
@@ -95,7 +95,7 @@ namespace asset_marketplace.Migrations
 
                     b.HasIndex("BuyerId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("asset_marketplace.Domain.Entities.OrderItem", b =>
@@ -131,7 +131,7 @@ namespace asset_marketplace.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("asset_marketplace.Domain.Entities.User", b =>
@@ -169,7 +169,7 @@ namespace asset_marketplace.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("asset_marketplace.Domain.Entities.Asset", b =>
