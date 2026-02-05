@@ -10,7 +10,7 @@ namespace asset_marketplace.Controllers;
 public class UserController(IUserService userService) : ControllerBase
 {
     [HttpGet]
-    public async Task<List<ResponseUserDto>> GetAll(
+    public async Task<List<UserDto>> GetAll(
         [FromQuery] int page = PaginationConstants.DefaultPageNumber,
         [FromQuery] int size = PaginationConstants.DefaultPageSize,
         CancellationToken cancellationToken = default)
@@ -19,7 +19,7 @@ public class UserController(IUserService userService) : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<ResponseUserDto>> GetById(
+    public async Task<ActionResult<UserDto>> GetById(
         Guid id,
         CancellationToken cancellationToken = default)
     {
@@ -39,7 +39,7 @@ public class UserController(IUserService userService) : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<ActionResult<ResponseUserDto>> Update(Guid id, [FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken)
+    public async Task<ActionResult<UserDto>> Update(Guid id, [FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
         var result = await userService.UpdateAsync(updateUserDto, cancellationToken);
 

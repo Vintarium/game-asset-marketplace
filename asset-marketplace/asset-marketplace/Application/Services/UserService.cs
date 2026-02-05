@@ -10,15 +10,15 @@ namespace asset_marketplace.Application.Services;
 
 public class UserService(IRepository<User> userRepository) : IUserService
 {
-    public async Task<List<ResponseUserDto>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
+    public async Task<List<UserDto>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
         var users = await userRepository.GetAllAsync(pageNumber, pageSize, cancellationToken);
 
-        return users.Select(user => new ResponseUserDto(user.Id, user.Email, user.Role))
+        return users.Select(user => new UserDto(user.Id, user.Email, user.Role))
             .ToList();
     }
 
-    public async Task<ResponseUserDto?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<UserDto?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByIdAsync(id, cancellationToken, asNoTracking: true);
 
@@ -26,10 +26,10 @@ public class UserService(IRepository<User> userRepository) : IUserService
         {
             return null;
         }
-        return new ResponseUserDto(user.Id, user.Email, user.Role);
+        return new UserDto(user.Id, user.Email, user.Role);
     }
 
-    public async Task<ResponseUserDto> CreateAsync(CreateUserDto createUserDto, CancellationToken cancellationToken)
+    public async Task<UserDto> CreateAsync(CreateUserDto createUserDto, CancellationToken cancellationToken)
     {
         var user = new User
         {
@@ -40,9 +40,9 @@ public class UserService(IRepository<User> userRepository) : IUserService
 
         await userRepository.AddAsync(user, cancellationToken);
 
-        return new ResponseUserDto(user.Id, user.Email, user.Role);
+        return new UserDto(user.Id, user.Email, user.Role);
     }
-    public async Task<ResponseUserDto?> UpdateAsync(UpdateUserDto updateUserDto, CancellationToken cancellationToken)
+    public async Task<UserDto?> UpdateAsync(UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByIdAsync(updateUserDto.Id, cancellationToken, asNoTracking: false);
         if (user is null)
@@ -55,7 +55,7 @@ public class UserService(IRepository<User> userRepository) : IUserService
 
         await userRepository.UpdateAsync(user, cancellationToken);
 
-        return new ResponseUserDto(user.Id, user.Email, user.Role);
+        return new UserDto(user.Id, user.Email, user.Role);
     }
 
     public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken)
