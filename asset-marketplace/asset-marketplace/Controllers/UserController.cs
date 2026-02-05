@@ -24,40 +24,32 @@ public class UserController(IUserService userService) : ControllerBase
         CancellationToken cancellationToken = default)
     {
         var user = await userService.GetByIdAsync(id, cancellationToken);
-        if (user is null)
-        {
-            return NotFound();
-        }
-        return user;
+
+        return user is not null ? Ok(user) : NotFound();
     }
 
     [HttpPost]
     public async Task<IActionResult> Create(CreateUserDto createUserDto, CancellationToken cancellationToken)
     {
         var result = await userService.CreateAsync(createUserDto, cancellationToken);
+
         return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
     }
 
     [HttpPut("{id:guid}")]
     public async Task<ActionResult<UserDto>> Update(Guid id, [FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
-        var result = await userService.UpdateAsync(updateUserDto, cancellationToken);
+        var updatedDto = updateUserDto with { Id = id };
+        var result = await userService.UpdateAsync(updatedDto, cancellationToken);
 
-        if (result is null)
-        {
-            return NotFound();
-        }
-        return result;
+        return result is not null ? Ok(result) : NotFound();
     }
 
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
     {
         var deleted = await userService.DeleteAsync(id, cancellationToken);
-        if (!deleted)
-        {
-            return NotFound();
-        }
-        return NoContent();
+
+        return deleted ? NoContent() : NotFound();
     }
 }

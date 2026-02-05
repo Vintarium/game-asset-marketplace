@@ -22,11 +22,7 @@ public class UserService(IRepository<User> userRepository) : IUserService
     {
         var user = await userRepository.GetByIdAsync(id, cancellationToken, asNoTracking: true);
 
-        if (user is null)
-        {
-            return null;
-        }
-        return new UserDto(user.Id, user.Email, user.Role);
+        return user is not null ? new UserDto(user.Id, user.Email, user.Role) : null;
     }
 
     public async Task<UserDto> CreateAsync(CreateUserDto createUserDto, CancellationToken cancellationToken)
