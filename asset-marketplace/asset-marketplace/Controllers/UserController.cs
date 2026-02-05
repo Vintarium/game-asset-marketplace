@@ -39,9 +39,9 @@ public class UserController(IUserService userService) : ControllerBase
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<ActionResult<ResponseUserDto>> Update(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken)
+    public async Task<ActionResult<ResponseUserDto>> Update(Guid id, [FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
-        var result = await userService.UpdateAsync(id, updateUserDto, cancellationToken);
+        var result = await userService.UpdateAsync(updateUserDto, cancellationToken);
 
         if (result is null)
         {

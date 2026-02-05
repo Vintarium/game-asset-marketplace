@@ -42,9 +42,9 @@ public class UserService(IRepository<User> userRepository) : IUserService
 
         return new ResponseUserDto(user.Id, user.Email, user.Role);
     }
-    public async Task<ResponseUserDto?> UpdateAsync(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken)
+    public async Task<ResponseUserDto?> UpdateAsync(UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
-        var user = await userRepository.GetByIdAsync(id, cancellationToken, asNoTracking: false);
+        var user = await userRepository.GetByIdAsync(updateUserDto.Id, cancellationToken, asNoTracking: false);
         if (user is null)
         {
             return null;
