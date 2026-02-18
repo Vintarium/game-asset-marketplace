@@ -10,7 +10,7 @@ namespace asset_marketplace.Application.Services;
 
 public class UserService(IRepository<User> userRepository) : IUserService
 {
-    public async Task<List<UserDto>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
+    public async Task<IReadOnlyCollection<UserDto>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
         var users = await userRepository.GetAllAsync(pageNumber, pageSize, cancellationToken);
 

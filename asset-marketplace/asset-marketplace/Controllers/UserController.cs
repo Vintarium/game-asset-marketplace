@@ -10,7 +10,7 @@ namespace asset_marketplace.Controllers;
 public class UserController(IUserService userService) : ControllerBase
 {
     [HttpGet]
-    public async Task<List<UserDto>> GetAll(
+    public async Task<IReadOnlyCollection<UserDto>> GetAll(
         [FromQuery] int page = PaginationConstants.DefaultPageNumber,
         [FromQuery] int size = PaginationConstants.DefaultPageSize,
         CancellationToken cancellationToken = default)
