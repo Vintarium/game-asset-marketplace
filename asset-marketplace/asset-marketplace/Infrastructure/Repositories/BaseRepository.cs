@@ -13,27 +13,26 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         _context = context;
         _dbSet = context.Set<T>();
     }
-    public Task<List<T>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken, bool asNoTraking = true)
+    public Task<List<T>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken, bool asNoTracking = true)
     {
         IQueryable<T> query = _dbSet;
-        if (asNoTraking)
+        if (asNoTracking)
         {
             query = query.AsNoTracking();
         }
 
         return query
-            .AsNoTracking()
             .OrderBy(entity => entity.Id)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync(cancellationToken);
     }
-    public Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken, bool asNoTraking = true)
+    public Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken, bool asNoTracking = true)
     {
         IQueryable<T> query = _dbSet;
-        if (asNoTraking)
+        if (asNoTracking)
         {
-            query = query.AsQueryable();
+            query = query.AsNoTracking();
         }
 
         return query.FirstOrDefaultAsync(entity => entity.Id == id, cancellationToken);

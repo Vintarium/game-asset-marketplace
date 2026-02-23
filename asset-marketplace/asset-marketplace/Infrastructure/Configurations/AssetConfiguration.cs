@@ -1,4 +1,5 @@
 ﻿using asset_marketplace.Domain.Constants;
+using asset_marketplace.Infrastructure.Constants;
 using asset_marketplace.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,18 +12,18 @@ public class AssetConfiguration : IEntityTypeConfiguration<Asset>
         builder.HasKey(asset => asset.Id);
 
         builder.Property(asset => asset.Name)
-            .HasMaxLength(ApplicationConstants.MaxNameLength)
+            .HasMaxLength(ValidationConstants.MaxNameLength)
             .IsRequired();
 
         builder.Property(asset => asset.Description)
-            .HasMaxLength(ApplicationConstants.MaxDescriptionLength);
+            .HasMaxLength(ValidationConstants.MaxDescriptionLength);
 
         builder.Property(asset => asset.Price)
-            .HasColumnType(ApplicationConstants.MoneyType)
+            .HasColumnType(DbConstants.MoneyType)
             .IsRequired();
 
         builder.Property(asset => asset.FilePath)
-            .HasMaxLength(ApplicationConstants.MaxUrlLength)
+            .HasMaxLength(ValidationConstants.MaxUrlLength)
             .IsRequired();
 
         builder.HasOne(asset => asset.Seller)

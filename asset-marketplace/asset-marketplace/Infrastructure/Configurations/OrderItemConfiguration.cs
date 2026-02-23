@@ -1,4 +1,4 @@
-﻿using asset_marketplace.Domain.Constants;
+﻿using asset_marketplace.Infrastructure.Constants;
 using asset_marketplace.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,7 +11,7 @@ public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
         builder.HasKey(orderItem => orderItem.Id);
 
         builder.Property(orderItem => orderItem.UnitPrice)
-            .HasColumnType(ApplicationConstants.MoneyType)
+            .HasColumnType(DbConstants.MoneyType)
             .IsRequired();
 
         builder.HasOne(orderItem => orderItem.Asset)
