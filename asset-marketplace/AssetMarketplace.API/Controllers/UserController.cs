@@ -10,12 +10,12 @@ namespace AssetMarketplace.API.Controllers;
 public class UserController(IUserService userService) : ControllerBase
 {
     [HttpGet]
-    public async Task<IReadOnlyCollection<UserDto>> GetAll(
+    public async Task<ActionResult<IReadOnlyCollection<UserDto>>> GetAll(
         [FromQuery] int page = PaginationConstants.DefaultPageNumber,
         [FromQuery] int size = PaginationConstants.DefaultPageSize,
         CancellationToken cancellationToken = default)
     {
-        return await userService.GetAllAsync(page, size, cancellationToken);
+        return Ok(await userService.GetAllAsync(page, size, cancellationToken));
     }
 
     [HttpGet("{id:guid}")]
@@ -29,7 +29,7 @@ public class UserController(IUserService userService) : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateUserDto createUserDto, CancellationToken cancellationToken)
+    public async Task<ActionResult<UserDto>> Create(CreateUserDto createUserDto, CancellationToken cancellationToken)
     {
         var result = await userService.CreateAsync(createUserDto, cancellationToken);
 
@@ -46,7 +46,7 @@ public class UserController(IUserService userService) : ControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
+    public async Task<ActionResult> Delete(Guid id, CancellationToken cancellationToken)
     {
         var deleted = await userService.DeleteAsync(id, cancellationToken);
 
