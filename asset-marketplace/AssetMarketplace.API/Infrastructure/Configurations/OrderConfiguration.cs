@@ -1,0 +1,27 @@
+﻿using AssetMarketplace.API.Infrastructure.Constants;
+using AssetMarketplace.API.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace AssetMarketplace.API.Infrastructure.Configurations;
+public class OrderConfiguration : IEntityTypeConfiguration<Order>
+{
+    public void Configure(EntityTypeBuilder<Order> builder)
+    {
+        builder.HasKey(order => order.Id);
+
+        builder.Property(order => order.TotalAmount)
+            .HasColumnType(DbConstants.MoneyType)
+            .IsRequired();
+
+        builder.HasOne(order => order.Buyer)
+            .WithMany(user => user.Orders)
+            .HasForeignKey(order => order.BuyerId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasMany(order => order.Items)
+            .WithOne(OrderItem => OrderItem.Order)
+            .HasForeignKey(orderItem => orderItem.OrderId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+}
