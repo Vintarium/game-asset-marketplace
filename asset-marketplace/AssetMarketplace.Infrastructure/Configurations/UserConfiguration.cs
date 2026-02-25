@@ -3,7 +3,7 @@ using AssetMarketplace.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AssetMarketplace.API.Infrastructure.Configurations;
+namespace AssetMarketplace.Infrastructure.Configurations;
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)

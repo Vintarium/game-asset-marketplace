@@ -1,10 +1,10 @@
-﻿using AssetMarketplace.API.Infrastructure.Constants;
+﻿using AssetMarketplace.Infrastructure.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using AssetMarketplace.Domain.Constants;
 using AssetMarketplace.Domain.Entities;
 
-namespace AssetMarketplace.API.Infrastructure.Configurations;
+namespace AssetMarketplace.Infrastructure.Configurations;
 public class AssetConfiguration : IEntityTypeConfiguration<Asset>
 {
     public void Configure(EntityTypeBuilder<Asset> builder)

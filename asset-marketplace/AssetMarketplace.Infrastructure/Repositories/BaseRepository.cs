@@ -2,7 +2,8 @@
 using AssetMarketplace.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace AssetMarketplace.API.Infrastructure.Repositories;
+namespace AssetMarketplace.Infrastructure.Repositories;
+
 public class BaseRepository<T> : IRepository<T> where T : BaseEntity
 {
     protected readonly ApplicationDbContext _context;
