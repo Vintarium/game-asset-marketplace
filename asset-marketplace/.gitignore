@@ -434,3 +434,4 @@ FodyWeavers.xsd
 *.slnx.sqlite
 bin/
 obj/
+*.editorconfig
