@@ -1,6 +1,7 @@
 ﻿using AssetMarketplace.Domain.Entities;
 using AssetMarketplace.Domain.Interfaces;
 using AssetMarketplace.Infrastructure.Repositories;
+using AssetMarketplace.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ public static class DependencyInjection
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<IRepository<User>, BaseRepository<User>>();
+        services.AddSingleton<IPasswordHasher, PasswordHasher>();
 
         return services;
     }
