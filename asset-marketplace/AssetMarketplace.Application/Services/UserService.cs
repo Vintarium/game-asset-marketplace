@@ -2,12 +2,10 @@
 using AssetMarketplace.Application.Interfaces;
 using AssetMarketplace.Domain.Entities;
 using AssetMarketplace.Domain.Interfaces;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace AssetMarketplace.Application.Services;
 
-public class UserService(IRepository<User> userRepository) : IUserService
+public class UserService(IRepository<User> userRepository, IPasswordHasher passwordHasher) : IUserService
 {
     public async Task<IReadOnlyCollection<UserDto>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
@@ -25,7 +23,7 @@ public class UserService(IRepository<User> userRepository) : IUserService
 
     public async Task<UserDto> CreateAsync(CreateUserDto createUserDto, CancellationToken cancellationToken)
     {
-        var user = new User { Email = createUserDto.Email, PasswordHash = HashPassword(createUserDto.Password), Role = createUserDto.Role };
+        var user = new User { Email = createUserDto.Email, PasswordHash = passwordHasher.HashPassword(createUserDto.Password), Role = createUserDto.Role };
 
         await userRepository.AddAsync(user, cancellationToken);
 
@@ -57,12 +55,5 @@ public class UserService(IRepository<User> userRepository) : IUserService
         }
         await userRepository.DeleteAsync(id, cancellationToken);
         return true;
-    }
-
-    private string HashPassword(string password)
-    {
-        var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
-
-        return Convert.ToHexString(bytes);
     }
 }
