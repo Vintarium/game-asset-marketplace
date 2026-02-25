@@ -1,11 +1,11 @@
-﻿using AssetMarketplace.API.Application.DTOs;
-using AssetMarketplace.API.Application.Interfaces;
+﻿using AssetMarketplace.Application.DTOs;
+using AssetMarketplace.Application.Interfaces;
 using AssetMarketplace.Domain.Entities;
 using AssetMarketplace.Domain.Interfaces;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace AssetMarketplace.API.Application.Services;
+namespace AssetMarketplace.Application.Services;
 
 public class UserService(IRepository<User> userRepository) : IUserService
 {

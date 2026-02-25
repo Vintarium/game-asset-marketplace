@@ -1,6 +1,6 @@
-﻿using AssetMarketplace.API.Application.DTOs;
+﻿using AssetMarketplace.Application.DTOs;
 
-namespace AssetMarketplace.API.Application.Interfaces;
+namespace AssetMarketplace.Application.Interfaces;
 public interface IUserService
 {
     Task<IReadOnlyCollection<UserDto>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken);

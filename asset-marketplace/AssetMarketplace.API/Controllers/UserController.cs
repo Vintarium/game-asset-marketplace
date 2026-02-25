@@ -1,5 +1,5 @@
-﻿using AssetMarketplace.API.Application.DTOs;
-using AssetMarketplace.API.Application.Interfaces;
+﻿using AssetMarketplace.Application.DTOs;
+using AssetMarketplace.Application.Interfaces;
 using AssetMarketplace.Domain.Constants;
 using Microsoft.AspNetCore.Mvc;
 

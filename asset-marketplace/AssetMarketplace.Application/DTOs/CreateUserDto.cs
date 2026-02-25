@@ -1,9 +1,10 @@
 ﻿using AssetMarketplace.Domain.Enums;
 
-namespace AssetMarketplace.API.Application.DTOs;
-public record UpdateUserDto
+namespace AssetMarketplace.Application.DTOs;
+
+public record CreateUserDto
 {
-    public required Guid Id { get; init; }
     public required string Email { get; init; }
+    public required string Password { get; init; }
     public required UserRole Role { get; init; }
 }

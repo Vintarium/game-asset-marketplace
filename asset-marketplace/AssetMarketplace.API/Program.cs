@@ -1,5 +1,5 @@
-using AssetMarketplace.API.Application.Interfaces;
-using AssetMarketplace.API.Application.Services;
+using AssetMarketplace.Application.Interfaces;
+using AssetMarketplace.Application.Services;
 using AssetMarketplace.Domain.Entities;
 using AssetMarketplace.Domain.Interfaces;
 using AssetMarketplace.Infrastructure;
