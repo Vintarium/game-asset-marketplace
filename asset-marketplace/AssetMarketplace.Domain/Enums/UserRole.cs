@@ -1,5 +1,5 @@
 ﻿using System;
-namespace AssetMarketplace.API.Domain.Enums;
+namespace AssetMarketplace.Domain.Enums;
 
 [Flags]
 public enum UserRole

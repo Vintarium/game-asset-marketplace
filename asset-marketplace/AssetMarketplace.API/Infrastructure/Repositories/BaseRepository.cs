@@ -1,5 +1,5 @@
-﻿using AssetMarketplace.API.Domain.Entities;
-using AssetMarketplace.API.Domain.Interfaces;
+﻿using AssetMarketplace.Domain.Entities;
+using AssetMarketplace.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace AssetMarketplace.API.Infrastructure.Repositories;

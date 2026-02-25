@@ -1,9 +1,9 @@
 using AssetMarketplace.API.Application.Interfaces;
 using AssetMarketplace.API.Application.Services;
-using AssetMarketplace.API.Domain.Entities;
-using AssetMarketplace.API.Domain.Interfaces;
 using AssetMarketplace.API.Infrastructure;
 using AssetMarketplace.API.Infrastructure.Repositories;
+using AssetMarketplace.Domain.Entities;
+using AssetMarketplace.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

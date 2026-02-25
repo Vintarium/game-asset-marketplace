@@ -1,8 +1,7 @@
 ﻿using AssetMarketplace.API.Application.DTOs;
 using AssetMarketplace.API.Application.Interfaces;
-using AssetMarketplace.API.Domain.Entities;
-using AssetMarketplace.API.Domain.Interfaces;
-using System.Linq;
+using AssetMarketplace.Domain.Entities;
+using AssetMarketplace.Domain.Interfaces;
 using System.Security.Cryptography;
 using System.Text;
 

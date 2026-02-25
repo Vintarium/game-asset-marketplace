@@ -1,4 +1,4 @@
-﻿namespace AssetMarketplace.API.Domain.Constants;
+﻿namespace AssetMarketplace.Domain.Constants;
 public class PaginationConstants
 {
     public const int DefaultPageNumber = 1;

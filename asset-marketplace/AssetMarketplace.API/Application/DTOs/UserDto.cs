@@ -1,4 +1,4 @@
-﻿using AssetMarketplace.API.Domain.Enums;
+﻿using AssetMarketplace.Domain.Enums;
 
 namespace AssetMarketplace.API.Application.DTOs;
 public record UserDto

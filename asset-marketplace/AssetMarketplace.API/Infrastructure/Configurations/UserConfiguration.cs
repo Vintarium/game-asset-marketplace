@@ -1,5 +1,5 @@
-﻿using AssetMarketplace.API.Domain.Constants;
-using AssetMarketplace.API.Domain.Entities;
+﻿using AssetMarketplace.Domain.Constants;
+using AssetMarketplace.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -1,6 +1,6 @@
-﻿using AssetMarketplace.API.Domain.Entities;
+﻿using AssetMarketplace.Domain.Entities;
 
-namespace AssetMarketplace.API.Domain.Interfaces;
+namespace AssetMarketplace.Domain.Interfaces;
 
 public interface IRepository<T> where T : BaseEntity
 {

@@ -1,4 +1,4 @@
-﻿namespace AssetMarketplace.API.Domain.Entities;
+﻿namespace AssetMarketplace.Domain.Entities;
 public class Order : BaseEntity
 {
     public required decimal TotalAmount { get; set; }

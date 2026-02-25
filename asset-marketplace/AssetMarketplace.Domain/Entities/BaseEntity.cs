@@ -1,4 +1,4 @@
-﻿namespace AssetMarketplace.API.Domain.Entities;
+﻿namespace AssetMarketplace.Domain.Entities;
 public abstract class BaseEntity
 {
     public Guid Id { get; set; }

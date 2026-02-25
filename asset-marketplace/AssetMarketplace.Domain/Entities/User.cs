@@ -1,6 +1,6 @@
-﻿using AssetMarketplace.API.Domain.Enums;
+﻿using AssetMarketplace.Domain.Enums;
 
-namespace AssetMarketplace.API.Domain.Entities;
+namespace AssetMarketplace.Domain.Entities;
 public class User : BaseEntity
 {
     public required string Email { get; set; }

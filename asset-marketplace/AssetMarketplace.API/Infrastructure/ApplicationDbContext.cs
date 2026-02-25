@@ -1,4 +1,4 @@
-﻿using AssetMarketplace.API.Domain.Entities;
+﻿using AssetMarketplace.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Reflection;

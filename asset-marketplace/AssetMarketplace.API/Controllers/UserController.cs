@@ -1,6 +1,6 @@
 ﻿using AssetMarketplace.API.Application.DTOs;
 using AssetMarketplace.API.Application.Interfaces;
-using AssetMarketplace.API.Domain.Constants;
+using AssetMarketplace.Domain.Constants;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AssetMarketplace.API.Controllers;

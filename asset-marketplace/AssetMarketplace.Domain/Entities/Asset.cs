@@ -1,4 +1,4 @@
-﻿namespace AssetMarketplace.API.Domain.Entities;
+﻿namespace AssetMarketplace.Domain.Entities;
 public class Asset : BaseEntity
 {
     public required string Name { get; set; }

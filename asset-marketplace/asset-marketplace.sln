@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.2.11408.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetMarketplace.API", "AssetMarketplace.API.csproj", "{F2FF065A-DFE9-47EF-2381-A85C29D47C28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetMarketplace.API", "AssetMarketplace.API\AssetMarketplace.API.csproj", "{F2FF065A-DFE9-47EF-2381-A85C29D47C28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetMarketplace.Domain", "AssetMarketplace.Domain\AssetMarketplace.Domain.csproj", "{E474AB63-97BC-43B6-BAA5-BB16AC8CBEDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F2FF065A-DFE9-47EF-2381-A85C29D47C28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2FF065A-DFE9-47EF-2381-A85C29D47C28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2FF065A-DFE9-47EF-2381-A85C29D47C28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E474AB63-97BC-43B6-BAA5-BB16AC8CBEDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E474AB63-97BC-43B6-BAA5-BB16AC8CBEDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E474AB63-97BC-43B6-BAA5-BB16AC8CBEDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E474AB63-97BC-43B6-BAA5-BB16AC8CBEDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

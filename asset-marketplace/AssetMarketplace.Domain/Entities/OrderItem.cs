@@ -1,4 +1,4 @@
-﻿namespace AssetMarketplace.API.Domain.Entities;
+﻿namespace AssetMarketplace.Domain.Entities;
 public class OrderItem : BaseEntity
 {
     public required Guid OrderId { get; set; }

@@ -1,7 +1,7 @@
 ﻿using AssetMarketplace.API.Infrastructure.Constants;
-using AssetMarketplace.API.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using AssetMarketplace.Domain.Entities;
 
 namespace AssetMarketplace.API.Infrastructure.Configurations;
 public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
