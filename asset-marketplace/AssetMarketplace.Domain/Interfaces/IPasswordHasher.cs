@@ -2,5 +2,5 @@
 
 public interface IPasswordHasher
 {
-    string HashPassword(string password);
+    public string HashPassword(string password);
 }
