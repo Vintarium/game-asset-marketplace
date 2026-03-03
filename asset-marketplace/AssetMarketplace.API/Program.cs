@@ -6,16 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
-
 builder.Services.AddControllers();
-
-builder.Services.AddOpenApi();
+builder.Services.AddSwaggerDocumentation();
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwaggerDocumentation();
 }
 
 app.UseHttpsRedirection();
