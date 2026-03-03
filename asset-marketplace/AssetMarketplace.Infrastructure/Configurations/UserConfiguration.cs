@@ -1,0 +1,26 @@
+﻿using AssetMarketplace.Domain.Constants;
+using AssetMarketplace.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace AssetMarketplace.Infrastructure.Configurations;
+public class UserConfiguration : IEntityTypeConfiguration<User>
+{
+    public void Configure(EntityTypeBuilder<User> builder)
+    {
+        builder.HasKey(user => user.Id);
+
+        builder.Property(user => user.Email)
+            .HasMaxLength(ValidationConstants.MaxEmailLength)
+            .IsRequired();
+
+        builder.HasIndex(user => user.Email)
+            .IsUnique();
+
+        builder.Property(user => user.PasswordHash)
+            .IsRequired();
+
+        builder.Property(user => user.Role)
+            .IsRequired();
+    }
+}
