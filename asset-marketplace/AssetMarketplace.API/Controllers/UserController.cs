@@ -46,8 +46,7 @@ public class UserController(IUserService userService, IValidator<CreateUserDto> 
     [HttpPut("{id:guid}")]
     public async Task<ActionResult<UserDto>> Update(Guid id, [FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
-        var updatedDto = updateUserDto with { Id = id };
-        var result = await userService.UpdateAsync(updatedDto, cancellationToken);
+        var result = await userService.UpdateAsync(id, updateUserDto, cancellationToken);
 
         return result is not null ? Ok(result) : NotFound();
     }
