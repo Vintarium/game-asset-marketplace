@@ -12,7 +12,8 @@ public static class DependencyInjection
     {
         services
             .AddScoped<IUserService, UserService>()
-            .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
+            .AddAutoMapper(Assembly.GetExecutingAssembly());
 
         return services;
     }
