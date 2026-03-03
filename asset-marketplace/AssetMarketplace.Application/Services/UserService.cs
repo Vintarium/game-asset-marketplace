@@ -29,16 +29,15 @@ public class UserService(IRepository<User> userRepository, IPasswordHasher passw
 
         return new UserDto { Id = user.Id, Email = user.Email, Role = user.Role };
     }
-    public async Task<UserDto?> UpdateAsync(UpdateUserDto updateUserDto, CancellationToken cancellationToken)
+    public async Task<UserDto?> UpdateAsync(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
-        var user = await userRepository.GetByIdAsync(updateUserDto.Id, cancellationToken, asNoTracking: false);
+        var user = await userRepository.GetByIdAsync(id, cancellationToken, asNoTracking: false);
         if (user is null)
         {
             return null;
         }
 
         user.Email = updateUserDto.Email;
-        user.Role = updateUserDto.Role;
 
         await userRepository.UpdateAsync(user, cancellationToken);
 
