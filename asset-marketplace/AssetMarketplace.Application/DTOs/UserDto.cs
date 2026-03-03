@@ -1,6 +1,7 @@
 ﻿using AssetMarketplace.Domain.Enums;
 
 namespace AssetMarketplace.Application.DTOs;
+
 public record UserDto
 {
     public required Guid Id { get; init; }
