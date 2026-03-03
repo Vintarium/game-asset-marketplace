@@ -8,7 +8,10 @@ namespace AssetMarketplace.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UserController(IUserService userService, IValidator<CreateUserDto> _validator) : ControllerBase
+public class UserController(
+    IUserService userService,
+    IValidator<CreateUserDto> createUserValidator,
+    IValidator<UpdateUserDto> updateUserValidator) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<IReadOnlyCollection<UserDto>>> GetAll(
@@ -32,7 +35,7 @@ public class UserController(IUserService userService, IValidator<CreateUserDto> 
     [HttpPost]
     public async Task<ActionResult<UserDto>> Create(CreateUserDto createUserDto, CancellationToken cancellationToken)
     {
-        var validationResult = await _validator.ValidateAsync(createUserDto, cancellationToken);
+        var validationResult = await createUserValidator.ValidateAsync(createUserDto, cancellationToken);
         if (!validationResult.IsValid)
         {
             return BadRequest(validationResult.Errors);
@@ -46,6 +49,12 @@ public class UserController(IUserService userService, IValidator<CreateUserDto> 
     [HttpPut("{id:guid}")]
     public async Task<ActionResult<UserDto>> Update(Guid id, [FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
+        var validationResult = await updateUserValidator.ValidateAsync(updateUserDto, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors);
+        }
+
         var result = await userService.UpdateAsync(id, updateUserDto, cancellationToken);
 
         return result is not null ? Ok(result) : NotFound();
