@@ -1,5 +1,4 @@
-﻿using AssetMarketplace.Domain.Entities;
-using AssetMarketplace.Domain.Interfaces;
+﻿using AssetMarketplace.Domain.Interfaces;
 using AssetMarketplace.Infrastructure.Repositories;
 using AssetMarketplace.Infrastructure.Security;
 using AssetMarketplace.Infrastructure.Settings;
@@ -27,8 +26,9 @@ public static class DependencyInjection
         });
 
         services
-            .AddScoped<IRepository<User>, BaseRepository<User>>()
-            .AddSingleton<IPasswordHasher, PasswordHasher>();
+            .AddScoped(typeof(IRepository<>), typeof(BaseRepository<>))
+            .AddSingleton<IPasswordHasher, PasswordHasher>()
+            .AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }

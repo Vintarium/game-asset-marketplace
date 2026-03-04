@@ -7,7 +7,7 @@ using AutoMapper;
 namespace AssetMarketplace.Application.Services;
 
 public class UserService(
-    IRepository<User> userRepository,
+    IUserRepository userRepository,
     IPasswordHasher passwordHasher,
     IMapper mapper) : IUserService
 {
