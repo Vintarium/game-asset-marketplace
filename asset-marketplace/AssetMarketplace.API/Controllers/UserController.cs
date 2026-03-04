@@ -1,13 +1,17 @@
 ﻿using AssetMarketplace.Application.DTOs;
 using AssetMarketplace.Application.Interfaces;
 using AssetMarketplace.Domain.Constants;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AssetMarketplace.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UserController(IUserService userService) : ControllerBase
+public class UserController(
+    IUserService userService,
+    IValidator<CreateUserDto> createUserValidator,
+    IValidator<UpdateUserDto> updateUserValidator) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<IReadOnlyCollection<UserDto>>> GetAll(
@@ -31,6 +35,12 @@ public class UserController(IUserService userService) : ControllerBase
     [HttpPost]
     public async Task<ActionResult<UserDto>> Create(CreateUserDto createUserDto, CancellationToken cancellationToken)
     {
+        var validationResult = await createUserValidator.ValidateAsync(createUserDto, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors);
+        }
+
         var result = await userService.CreateAsync(createUserDto, cancellationToken);
 
         return Ok(result);
@@ -39,8 +49,13 @@ public class UserController(IUserService userService) : ControllerBase
     [HttpPut("{id:guid}")]
     public async Task<ActionResult<UserDto>> Update(Guid id, [FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
-        var updatedDto = updateUserDto with { Id = id };
-        var result = await userService.UpdateAsync(updatedDto, cancellationToken);
+        var validationResult = await updateUserValidator.ValidateAsync(updateUserDto, cancellationToken);
+        if (!validationResult.IsValid)
+        {
+            return BadRequest(validationResult.Errors);
+        }
+
+        var result = await userService.UpdateAsync(id, updateUserDto, cancellationToken);
 
         return result is not null ? Ok(result) : NotFound();
     }

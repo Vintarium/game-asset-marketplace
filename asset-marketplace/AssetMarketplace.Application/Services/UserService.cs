@@ -5,7 +5,7 @@ using AssetMarketplace.Domain.Interfaces;
 
 namespace AssetMarketplace.Application.Services;
 
-public class UserService(IRepository<User> userRepository, IPasswordHasher passwordHasher) : IUserService
+public class UserService(IUserRepository userRepository, IPasswordHasher passwordHasher) : IUserService
 {
     public async Task<IReadOnlyCollection<UserDto>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
@@ -29,16 +29,15 @@ public class UserService(IRepository<User> userRepository, IPasswordHasher passw
 
         return new UserDto { Id = user.Id, Email = user.Email, Role = user.Role };
     }
-    public async Task<UserDto?> UpdateAsync(UpdateUserDto updateUserDto, CancellationToken cancellationToken)
+    public async Task<UserDto?> UpdateAsync(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
-        var user = await userRepository.GetByIdAsync(updateUserDto.Id, cancellationToken, asNoTracking: false);
+        var user = await userRepository.GetByIdAsync(id, cancellationToken, asNoTracking: false);
         if (user is null)
         {
             return null;
         }
 
         user.Email = updateUserDto.Email;
-        user.Role = updateUserDto.Role;
 
         await userRepository.UpdateAsync(user, cancellationToken);
 
