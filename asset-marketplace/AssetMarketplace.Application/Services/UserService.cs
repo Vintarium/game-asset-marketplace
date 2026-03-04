@@ -5,7 +5,7 @@ using AssetMarketplace.Domain.Interfaces;
 
 namespace AssetMarketplace.Application.Services;
 
-public class UserService(IRepository<User> userRepository, IPasswordHasher passwordHasher) : IUserService
+public class UserService(IUserRepository userRepository, IPasswordHasher passwordHasher) : IUserService
 {
     public async Task<IReadOnlyCollection<UserDto>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
