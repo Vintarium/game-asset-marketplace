@@ -11,15 +11,7 @@ public sealed class CreateUserDtoValidator : AbstractValidator<CreateUserDto>
     {
         RuleFor(createUserDto => createUserDto.Email)
             .NotEmpty().WithMessage("Email cannot be empty")
-            .EmailAddress().WithMessage("Incorrect format")
-
-            .MustAsync(async (email, CancellationToken) =>
-            {
-                var existingUser = await userRepository.GetByEmailAsync(email, CancellationToken);
-
-                return existingUser is null;
-            })
-            .WithMessage("User with this email already exists");
+            .EmailAddress().WithMessage("Incorrect format");
 
         RuleFor(createUserDto => createUserDto.Password)
             .NotEmpty().WithMessage("Password cannot be empty")
