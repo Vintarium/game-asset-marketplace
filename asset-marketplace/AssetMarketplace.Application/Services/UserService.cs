@@ -23,18 +23,18 @@ public class UserService(
         var user = await userRepository.GetByIdAsync(id, cancellationToken, asNoTracking: true);
 
         return mapper.Map<UserDto>(user);
-
     }
 
     public async Task<UserDto> CreateAsync(CreateUserDto createUserDto, CancellationToken cancellationToken)
     {
-        var user = new User { Email = createUserDto.Email, PasswordHash = passwordHasher.HashPassword(createUserDto.Password), Role = createUserDto.Role };
+        var user = mapper.Map<User>(createUserDto);
+        user.PasswordHash = passwordHasher.HashPassword(createUserDto.Password);
 
         await userRepository.AddAsync(user, cancellationToken);
 
         return mapper.Map<UserDto>(user);
-
     }
+
     public async Task<UserDto?> UpdateAsync(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByIdAsync(id, cancellationToken, asNoTracking: false);
@@ -43,12 +43,11 @@ public class UserService(
             return null;
         }
 
-        user.Email = updateUserDto.Email;
+        mapper.Map(updateUserDto, user);
 
         await userRepository.UpdateAsync(user, cancellationToken);
 
         return mapper.Map<UserDto?>(user);
-
     }
 
     public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken)
