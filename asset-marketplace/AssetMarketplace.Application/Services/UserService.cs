@@ -27,6 +27,12 @@ public class UserService(
 
     public async Task<UserDto> CreateAsync(CreateUserDto createUserDto, CancellationToken cancellationToken)
     {
+        var existingUser = await userRepository.GetByEmailAsync(createUserDto.Email, cancellationToken);
+        if (existingUser is not null)
+        {
+            throw new InvalidOperationException("User with this email already exists");
+        }
+
         var user = mapper.Map<User>(createUserDto);
         user.PasswordHash = passwordHasher.HashPassword(createUserDto.Password);
 
