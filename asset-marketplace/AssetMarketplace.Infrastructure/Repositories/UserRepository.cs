@@ -10,6 +10,6 @@ public class UserRepository(ApplicationDbContext context) : BaseRepository<User>
     {
         return await _dbSet
             .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
+            .SingleOrDefaultAsync(user => user.Email == email, cancellationToken);
     }
 }
