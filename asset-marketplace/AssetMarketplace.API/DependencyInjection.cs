@@ -15,9 +15,8 @@ namespace AssetMarketplace.API
                 options.Filters.Add<ExceptionFilter>();
             });
 
-            services.AddFluentValidationAutoValidation();
-            services.AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
-            services.AddValidatorsFromAssemblyContaining<UpdateUserDtoValidator>();
+            services.AddFluentValidationAutoValidation()
+            .AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
 
             return services;
         }
