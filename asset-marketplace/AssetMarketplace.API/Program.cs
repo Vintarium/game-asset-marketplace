@@ -13,7 +13,7 @@ builder.Services.AddApplication();
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ValidateModelFilter>();
-    options.Filters.Add<ExeptionFilter>();
+    options.Filters.Add<ExceptionFilter>();
 });
 
 builder.Services.AddFluentValidationAutoValidation();
