@@ -1,13 +1,15 @@
 using AssetMarketplace.API.Filters;
 using AssetMarketplace.Application;
+using AssetMarketplace.Application.Validation;
 using AssetMarketplace.Infrastructure;
+using FluentValidation;
 using FluentValidation.AspNetCore;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ValidateModelFilter>();
@@ -15,6 +17,9 @@ builder.Services.AddControllers(options =>
 });
 
 builder.Services.AddFluentValidationAutoValidation();
+
+builder.Services.AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UpdateUserDtoValidator>();
 
 builder.Services.AddSwaggerDocumentation();
 
