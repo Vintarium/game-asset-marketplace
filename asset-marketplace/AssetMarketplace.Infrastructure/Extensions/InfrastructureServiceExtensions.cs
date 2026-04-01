@@ -7,9 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace AssetMarketplace.Infrastructure;
+namespace AssetMarketplace.Infrastructure.Extensions;
 
-public static class InfrastructureDependencyInjection
+public static class InfrastructureServiceExtensions
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
