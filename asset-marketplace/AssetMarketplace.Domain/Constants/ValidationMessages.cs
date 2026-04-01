@@ -21,6 +21,5 @@
         {
             return $"{enumValue}: A non-existent role was specified. Valid values: 0, 1, 2, 4";
         }
-
     }
 }
