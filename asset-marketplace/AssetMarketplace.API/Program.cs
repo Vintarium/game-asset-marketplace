@@ -1,12 +1,14 @@
-using AssetMarketplace.Application;
-using AssetMarketplace.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+using AssetMarketplace.API.Extentions;
+using AssetMarketplace.Application.Extensions;
+using AssetMarketplace.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
-builder.Services.AddControllers();
+
+builder.Services.AddPresentation();
+
 builder.Services.AddSwaggerDocumentation();
 
 var app = builder.Build();
