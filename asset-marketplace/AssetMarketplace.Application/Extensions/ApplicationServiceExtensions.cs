@@ -4,9 +4,9 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace AssetMarketplace.Application;
+namespace AssetMarketplace.Application.Extensions;
 
-public static class DependencyInjection
+public static class ApplicationServiceExtensions
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {

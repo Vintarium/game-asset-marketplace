@@ -1,6 +1,6 @@
 ﻿namespace AssetMarketplace.Domain.Constants;
 
-public class ValidationConstants
+public static class ValidationConstants
 {
     public const int MaxNameLength = 100;
     public const int MaxDescriptionLength = 500;

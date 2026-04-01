@@ -1,20 +1,13 @@
-using AssetMarketplace.API.Filters;
-using AssetMarketplace.Application;
-using AssetMarketplace.Infrastructure;
-using FluentValidation.AspNetCore;
-using Microsoft.EntityFrameworkCore;
+using AssetMarketplace.API.Extentions;
+using AssetMarketplace.Application.Extensions;
+using AssetMarketplace.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
-builder.Services.AddControllers(options =>
-{
-    options.Filters.Add<ValidateModelFilter>();
-    options.Filters.Add<ExeptionFilter>();
-});
 
-builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddPresentation();
 
 builder.Services.AddSwaggerDocumentation();
 
