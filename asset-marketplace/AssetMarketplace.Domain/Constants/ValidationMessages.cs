@@ -17,9 +17,9 @@
             return $"{propertyName}: minimum length: {ValidationConstants.MinPasswordLength}";
         }
 
-        public static string InvalidRole(string propertyName)
+        public static string InvalidRole(string enumValue)
         {
-            return $"{propertyName}: A non-existent role was specified. Valid values: 0, 1, 2, 4";
+            return $"{enumValue}: A non-existent role was specified. Valid values: 0, 1, 2, 4";
         }
 
     }
