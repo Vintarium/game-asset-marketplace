@@ -3,9 +3,9 @@ using AssetMarketplace.Application.Validation;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 
-namespace AssetMarketplace.API
+namespace AssetMarketplace.API.Extentions
 {
-    public static class ApiDependencyInjection
+    public static class PresentationServiceExtensions
     {
         public static IServiceCollection AddPresentation(this IServiceCollection services)
         {
