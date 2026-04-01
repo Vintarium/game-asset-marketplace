@@ -5,7 +5,7 @@ using FluentValidation.AspNetCore;
 
 namespace AssetMarketplace.API
 {
-    public static class DependencyInjection
+    public static class ApiDependencyInjection
     {
         public static IServiceCollection AddPresentation(this IServiceCollection services)
         {
