@@ -1,6 +1,6 @@
-using AssetMarketplace.API;
-using AssetMarketplace.Application;
-using AssetMarketplace.Infrastructure;
+using AssetMarketplace.API.Extentions;
+using AssetMarketplace.Application.Extensions;
+using AssetMarketplace.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
