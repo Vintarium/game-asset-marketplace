@@ -9,7 +9,7 @@ public sealed class UpdateUserDtoValidator : AbstractValidator<UpdateUserDto>
     public UpdateUserDtoValidator()
     {
         RuleFor(updateUserDto => updateUserDto.Email)
-            .NotEmpty().WithMessage(ValidationMessages.EmailEmpty)
-            .EmailAddress().WithMessage(ValidationMessages.EmailInvalid);
+            .NotEmpty().WithMessage(ValidationMessages.EmptyValue("Email"))
+            .EmailAddress().WithMessage(ValidationMessages.InvalidValue("Email"));
     }
 }

@@ -10,15 +10,15 @@ public sealed class CreateUserDtoValidator : AbstractValidator<CreateUserDto>
     public CreateUserDtoValidator(IUserRepository userRepository)
     {
         RuleFor(createUserDto => createUserDto.Email)
-            .NotEmpty().WithMessage(ValidationMessages.EmailEmpty)
-            .EmailAddress().WithMessage(ValidationMessages.EmailInvalid);
+            .NotEmpty().WithMessage(ValidationMessages.EmptyValue("Email"))
+            .EmailAddress().WithMessage(ValidationMessages.InvalidValue("Email"));
 
         RuleFor(createUserDto => createUserDto.Password)
-            .NotEmpty().WithMessage(ValidationMessages.PasswordEmpty)
-            .MinimumLength(ValidationConstants.MinPasswordLength).WithMessage($"{ValidationMessages.PasswordInvalid} {ValidationConstants.MinPasswordLength}");
+            .NotEmpty().WithMessage(ValidationMessages.EmptyValue("Password"))
+            .MinimumLength(ValidationConstants.MinPasswordLength).WithMessage($"{ValidationMessages.InvalidValue("Password")}");
 
         RuleFor(x => x.Role)
             .IsInEnum()
-            .WithMessage(ValidationMessages.RoleInvalid);
+            .WithMessage(ValidationMessages.InvalidRole("Role"));
     }
 }
