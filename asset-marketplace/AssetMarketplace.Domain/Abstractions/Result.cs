@@ -23,9 +23,6 @@ public class Result
     public static Result Failure(Error error) => new(false, error);
 }
 
-
-
-
 public class Result<TValue> : Result
 {
     private readonly TValue? _value;
