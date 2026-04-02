@@ -9,11 +9,11 @@ public class UserController(IUserService userService) : BaseController
 {
     [HttpGet]
     public async Task<IActionResult> GetAll(
-        [FromQuery] int page = PaginationConstants.DefaultPageNumber,
-        [FromQuery] int size = PaginationConstants.DefaultPageSize,
+        [FromQuery] int pageNumber = PaginationConstants.DefaultPageNumber,
+        [FromQuery] int pageSize = PaginationConstants.DefaultPageSize,
         CancellationToken cancellationToken = default)
     {
-        return Ok(await userService.GetAllAsync(page, size, cancellationToken));
+        return Ok(await userService.GetAllAsync(pageNumber, pageSize, cancellationToken));
     }
 
     [HttpGet("{id:guid}")]
