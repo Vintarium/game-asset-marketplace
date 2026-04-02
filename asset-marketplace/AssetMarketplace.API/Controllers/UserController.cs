@@ -27,7 +27,7 @@ public class UserController(IUserService userService) : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateUserDto createUserDto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Create(CreateUserDto createUserDto, CancellationToken cancellationToken = default)
     {
         var result = await userService.CreateAsync(createUserDto, cancellationToken);
 
@@ -35,7 +35,7 @@ public class UserController(IUserService userService) : BaseController
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken = default)
     {
         var result = await userService.UpdateAsync(id, updateUserDto, cancellationToken);
 
@@ -43,7 +43,7 @@ public class UserController(IUserService userService) : BaseController
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken = default)
     {
         var result = await userService.DeleteAsync(id, cancellationToken);
 
