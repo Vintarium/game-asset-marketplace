@@ -5,12 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AssetMarketplace.API.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class UserController(IUserService userService) : ControllerBase
+public class UserController(IUserService userService) : BaseController
 {
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyCollection<UserDto>>> GetAll(
+    public async Task<IActionResult> GetAll(
         [FromQuery] int page = PaginationConstants.DefaultPageNumber,
         [FromQuery] int size = PaginationConstants.DefaultPageSize,
         CancellationToken cancellationToken = default)
@@ -19,36 +17,36 @@ public class UserController(IUserService userService) : ControllerBase
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<ActionResult<UserDto>> GetById(
+    public async Task<IActionResult> GetById(
         Guid id,
         CancellationToken cancellationToken = default)
     {
         var user = await userService.GetByIdAsync(id, cancellationToken);
 
-        return user is not null ? Ok(user) : NotFound();
+        return HandleResult(user);
     }
 
     [HttpPost]
-    public async Task<ActionResult<UserDto>> Create(CreateUserDto createUserDto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Create(CreateUserDto createUserDto, CancellationToken cancellationToken)
     {
         var result = await userService.CreateAsync(createUserDto, cancellationToken);
 
-        return Ok(result);
+        return HandleResult(result);
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<ActionResult<UserDto>> Update(Guid id, [FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
         var result = await userService.UpdateAsync(id, updateUserDto, cancellationToken);
 
-        return result is not null ? Ok(result) : NotFound();
+        return HandleResult(result);
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<ActionResult> Delete(Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
     {
-        var deleted = await userService.DeleteAsync(id, cancellationToken);
+        var result = await userService.DeleteAsync(id, cancellationToken);
 
-        return deleted ? NoContent() : NotFound();
+        return HandleResult(result);
     }
 }
