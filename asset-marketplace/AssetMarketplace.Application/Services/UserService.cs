@@ -1,5 +1,7 @@
 ﻿using AssetMarketplace.Application.DTOs;
 using AssetMarketplace.Application.Interfaces;
+using AssetMarketplace.Domain.Abstractions;
+using AssetMarketplace.Domain.Constants;
 using AssetMarketplace.Domain.Entities;
 using AssetMarketplace.Domain.Interfaces;
 using AutoMapper;
@@ -11,26 +13,34 @@ public class UserService(
     IPasswordHasher passwordHasher,
     IMapper mapper) : IUserService
 {
-    public async Task<IReadOnlyCollection<UserDto>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
+    public async Task<Result<IReadOnlyCollection<UserDto>>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
         var users = await userRepository.GetAllAsync(pageNumber, pageSize, cancellationToken);
 
-        return mapper.Map<IReadOnlyCollection<UserDto>>(users);
+        var allUsers = mapper.Map<IReadOnlyCollection<UserDto>>(users);
+
+        return Result<IReadOnlyCollection<UserDto>>.Success(allUsers);
     }
 
-    public async Task<UserDto?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<Result<UserDto>> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByIdAsync(id, cancellationToken, asNoTracking: true);
+        if (user is null)
+        {
+            return Result<UserDto>.Failure(UserErrors.NotFound);
+        }
 
-        return mapper.Map<UserDto>(user);
+        var userDto = mapper.Map<UserDto>(user);
+        return Result<UserDto>.Success(userDto);
+
     }
 
-    public async Task<UserDto> CreateAsync(CreateUserDto createUserDto, CancellationToken cancellationToken)
+    public async Task<Result<UserDto>> CreateAsync(CreateUserDto createUserDto, CancellationToken cancellationToken)
     {
         var existingUser = await userRepository.GetByEmailAsync(createUserDto.Email, cancellationToken);
         if (existingUser is not null)
         {
-            throw new InvalidOperationException("User with this email already exists");
+            return Result<UserDto>.Failure(UserErrors.EmailNotUnique);
         }
 
         var user = mapper.Map<User>(createUserDto);
@@ -38,33 +48,36 @@ public class UserService(
 
         await userRepository.AddAsync(user, cancellationToken);
 
-        return mapper.Map<UserDto>(user);
+        var userDto = mapper.Map<UserDto>(user);
+
+        return Result<UserDto>.Success(userDto);
     }
 
-    public async Task<UserDto?> UpdateAsync(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken)
+    public async Task<Result<UserDto>> UpdateAsync(Guid id, UpdateUserDto updateUserDto, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByIdAsync(id, cancellationToken, asNoTracking: false);
         if (user is null)
         {
-            return null;
+            return Result<UserDto>.Failure(UserErrors.NotFound);
         }
 
         mapper.Map(updateUserDto, user);
 
         await userRepository.UpdateAsync(user, cancellationToken);
 
-        return mapper.Map<UserDto?>(user);
+        var userDto = mapper.Map<UserDto>(user);
+        return Result<UserDto>.Success(userDto);
     }
 
-    public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken)
+    public async Task<Result> DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         var user = await userRepository.GetByIdAsync(id, cancellationToken);
 
         if (user is null)
         {
-            return false;
+            return Result.Failure(UserErrors.NotFound);
         }
         await userRepository.DeleteAsync(id, cancellationToken);
-        return true;
+        return Result.Success();
     }
 }
