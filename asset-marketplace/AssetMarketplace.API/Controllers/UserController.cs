@@ -13,7 +13,9 @@ public class UserController(IUserService userService) : BaseController
         [FromQuery] int pageSize = PaginationConstants.DefaultPageSize,
         CancellationToken cancellationToken = default)
     {
-        return Ok(await userService.GetAllAsync(pageNumber, pageSize, cancellationToken));
+        var allUsers = await userService.GetAllAsync(pageNumber, pageSize, cancellationToken);
+
+        return HandleResult(allUsers);
     }
 
     [HttpGet("{id:guid}")]
