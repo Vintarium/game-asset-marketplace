@@ -8,7 +8,6 @@ public class Result
 
     protected Result(bool isSuccess, Error error)
     {
-
         if (isSuccess && error != Error.None)
             throw new InvalidOperationException();
 
