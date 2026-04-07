@@ -1,5 +1,4 @@
 using AssetMarketplace.API.Extensions;
-using AssetMarketplace.API.Extentions;
 using AssetMarketplace.API.Middleware;
 using AssetMarketplace.Application.Extensions;
 using AssetMarketplace.Infrastructure.Extensions;
