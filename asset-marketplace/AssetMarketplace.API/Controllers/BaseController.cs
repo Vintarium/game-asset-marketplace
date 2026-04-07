@@ -8,7 +8,6 @@ namespace AssetMarketplace.API.Controllers;
 [Route("api/[controller]")]
 public abstract class BaseController : ControllerBase
 {
-
     protected IActionResult HandleResult<T>(Result<T> result)
     {
         if (result.IsSuccess)
