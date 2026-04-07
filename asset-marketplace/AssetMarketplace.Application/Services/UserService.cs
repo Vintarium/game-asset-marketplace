@@ -13,11 +13,13 @@ public class UserService(
     IPasswordHasher passwordHasher,
     IMapper mapper) : IUserService
 {
-    public async Task<IReadOnlyCollection<UserDto>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
+    public async Task<Result<IReadOnlyCollection<UserDto>>> GetAllAsync(int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
         var users = await userRepository.GetAllAsync(pageNumber, pageSize, cancellationToken);
 
-        return mapper.Map<IReadOnlyCollection<UserDto>>(users);
+        var allUsers = mapper.Map<IReadOnlyCollection<UserDto>>(users);
+
+        return Result<IReadOnlyCollection<UserDto>>.Success(allUsers);
     }
 
     public async Task<Result<UserDto>> GetByIdAsync(Guid id, CancellationToken cancellationToken)
