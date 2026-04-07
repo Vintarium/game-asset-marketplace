@@ -3,22 +3,20 @@ using AssetMarketplace.Application.Validation;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 
-namespace AssetMarketplace.API.Extentions
+namespace AssetMarketplace.API.Extensions;
+
+public static class PresentationServiceExtensions
 {
-    public static class PresentationServiceExtensions
+    public static IServiceCollection AddPresentation(this IServiceCollection services)
     {
-        public static IServiceCollection AddPresentation(this IServiceCollection services)
+        services.AddControllers(options =>
         {
-            services.AddControllers(options =>
-            {
-                options.Filters.Add<ValidateModelFilter>();
-                options.Filters.Add<ExceptionFilter>();
-            });
+            options.Filters.Add<ValidateModelFilter>();
+        });
 
-            services.AddFluentValidationAutoValidation()
-            .AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
+        services.AddFluentValidationAutoValidation()
+        .AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
 
-            return services;
-        }
+        return services;
     }
 }
