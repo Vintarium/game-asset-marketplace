@@ -4,46 +4,36 @@ using AssetMarketplace.Application.Extensions;
 using AssetMarketplace.Infrastructure.Extensions;
 using Serilog;
 
-LoggingExtensions.ConfigureLogging();
+var builder = WebApplication.CreateBuilder(args);
 
-try
+builder.Host.UseSerilog((context, loggerConfiguration) =>
 {
-    Log.Information("Application is starting...");
+    loggerConfiguration.ReadFrom.Configuration(context.Configuration);
+});
 
-    var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddInfrastructure(builder.Configuration);
 
-    builder.Host.UseSerilog();
+builder.Services.AddApplication();
 
-    builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddPresentation();
 
-    builder.Services.AddApplication();
+builder.Services.AddSwaggerDocumentation();
 
-    builder.Services.AddPresentation();
+var app = builder.Build();
 
-    builder.Services.AddSwaggerDocumentation();
+app.UseSerilogRequestLogging();
 
-    var app = builder.Build();
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
-    app.UseMiddleware<GlobalExceptionMiddleware>();
-
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseSwaggerDocumentation();
-    }
-
-    app.UseHttpsRedirection();
-
-    app.UseAuthorization();
-
-    app.MapControllers();
-
-    app.Run();
-}
-catch (Exception exception)
+if (app.Environment.IsDevelopment())
 {
-    Log.Fatal(exception, "Application start-up failed");
+    app.UseSwaggerDocumentation();
 }
-finally
-{
-    Log.CloseAndFlush();
-}
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
