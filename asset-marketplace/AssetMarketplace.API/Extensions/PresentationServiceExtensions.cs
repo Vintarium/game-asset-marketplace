@@ -15,7 +15,7 @@ public static class PresentationServiceExtensions
         });
 
         services.AddFluentValidationAutoValidation()
-        .AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
+            .AddValidatorsFromAssemblyContaining<CreateUserDtoValidator>();
 
         return services;
     }
