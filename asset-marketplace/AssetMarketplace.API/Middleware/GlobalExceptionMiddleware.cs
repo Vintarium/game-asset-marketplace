@@ -13,7 +13,14 @@ public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExcep
         }
         catch (Exception exception)
         {
-            logger.LogError(exception, "An unhandled exception has occurred: {Message}", exception.Message);
+            var location = exception.StackTrace?.Split('\n')
+                .FirstOrDefault(line => line.Contains("AssetMarketplace"));
+
+            logger.LogError(
+                exception, "CRITICAL ERROR: {Method} | PATH: {Path} | LOCATION: {Location}",
+                context.Request.Method,
+                context.Request.Path,
+                location ?? "Unknown");
 
             await HandleExceptionAsync(context, exception);
         }
