@@ -31,7 +31,7 @@ public static class InfrastructureServiceExtensions
             .AddScoped(typeof(IRepository<>), typeof(BaseRepository<>))
             .AddSingleton<IPasswordHasher, PasswordHasher>()
             .AddScoped<IUserRepository, UserRepository>()
-            .AddScoped<IDateTimeProvider, DateTimeProvider>();
+            .AddSingleton<IDateTimeProvider, DateTimeProvider>();
 
         return services;
     }
