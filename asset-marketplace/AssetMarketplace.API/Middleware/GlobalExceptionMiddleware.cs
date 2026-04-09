@@ -1,9 +1,10 @@
-﻿using System.Net;
+﻿using AssetMarketplace.Application.Interfaces;
+using System.Net;
 using System.Text.Json;
 
 namespace AssetMarketplace.API.Middleware;
 
-public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger)
+public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExceptionMiddleware> logger, IDateTimeProvider dateTimeProvider)
 {
     public async Task InvokeAsync(HttpContext context)
     {
@@ -49,7 +50,7 @@ public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExcep
         {
             error = errorCode,
             message = resultMessage,
-            timestamp = DateTime.UtcNow
+            timestamp = dateTimeProvider.UtcNow
         };
 
         var json = JsonSerializer.Serialize(response);
