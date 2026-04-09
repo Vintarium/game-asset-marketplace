@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AssetMarketplace.Application\AssetMarketplace.Application.csproj" />
     <ProjectReference Include="..\AssetMarketplace.Domain\AssetMarketplace.Domain.csproj" />
   </ItemGroup>
 
