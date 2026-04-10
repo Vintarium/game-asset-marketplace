@@ -8,7 +8,7 @@ using AutoMapper;
 using FluentAssertions;
 using Moq;
 
-namespace AssetMarketplace.Application.Tests;
+namespace AssetMarketplace.Application.Tests.Services;
 
 public class UserServiceTests
 {
