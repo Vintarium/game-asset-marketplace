@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AssetMarketplace.Application\AssetMarketplace.Application.csproj" />
-    <ProjectReference Include="..\AssetMarketplace.Domain\AssetMarketplace.Domain.csproj" />
+    <ProjectReference Include="..\..\src\AssetMarketplace.Application\AssetMarketplace.Application.csproj" />
+    <ProjectReference Include="..\..\src\AssetMarketplace.Domain\AssetMarketplace.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AssetMarketplace.API\AssetMarketplace.API.csproj" />
-    <ProjectReference Include="..\AssetMarketplace.Application\AssetMarketplace.Application.csproj" />
-    <ProjectReference Include="..\AssetMarketplace.Domain\AssetMarketplace.Domain.csproj" />
+    <ProjectReference Include="..\..\src\AssetMarketplace.API\AssetMarketplace.API.csproj" />
+    <ProjectReference Include="..\..\src\AssetMarketplace.Application\AssetMarketplace.Application.csproj" />
+    <ProjectReference Include="..\..\src\AssetMarketplace.Domain\AssetMarketplace.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
