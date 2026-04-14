@@ -1,4 +1,5 @@
 ﻿using AssetMarketplace.Application.Interfaces;
+using AssetMarketplace.Application.Mappings;
 using AssetMarketplace.Application.Services;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +14,10 @@ public static class ApplicationServiceExtensions
         services
             .AddScoped<IUserService, UserService>()
             .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
-            .AddAutoMapper(Assembly.GetExecutingAssembly());
+            .AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<UserMappingProfile>();
+            });
 
         return services;
     }
