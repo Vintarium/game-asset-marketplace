@@ -18,10 +18,9 @@ public class GlobalExceptionMiddleware(RequestDelegate next, ILogger<GlobalExcep
                 .FirstOrDefault(line => line.Contains("AssetMarketplace"));
 
             logger.LogError(
-                exception, "CRITICAL ERROR: {Method} | PATH: {Path} | LOCATION: {Location}",
+                exception, "An unhandled exception has occurred while executing the request. Method: {Method}, Path: {Path}",
                 context.Request.Method,
-                context.Request.Path,
-                location ?? "Unknown");
+                context.Request.Path);
 
             await HandleExceptionAsync(context, exception);
         }
