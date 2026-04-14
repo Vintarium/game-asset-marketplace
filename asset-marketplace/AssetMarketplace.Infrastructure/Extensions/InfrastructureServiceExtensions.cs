@@ -1,6 +1,8 @@
-﻿using AssetMarketplace.Domain.Interfaces;
+﻿using AssetMarketplace.Application.Interfaces;
+using AssetMarketplace.Domain.Interfaces;
 using AssetMarketplace.Infrastructure.Repositories;
 using AssetMarketplace.Infrastructure.Security;
+using AssetMarketplace.Infrastructure.Services;
 using AssetMarketplace.Infrastructure.Settings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +30,8 @@ public static class InfrastructureServiceExtensions
         services
             .AddScoped(typeof(IRepository<>), typeof(BaseRepository<>))
             .AddSingleton<IPasswordHasher, PasswordHasher>()
-            .AddScoped<IUserRepository, UserRepository>();
+            .AddScoped<IUserRepository, UserRepository>()
+            .AddSingleton<IDateTimeProvider, DateTimeProvider>();
 
         return services;
     }
